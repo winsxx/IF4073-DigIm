@@ -1,7 +1,21 @@
 package digim.view;
 
+import java.awt.BorderLayout;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 public class DigImView extends javax.swing.JFrame {
 
+    /**
+     * DigIm Variables
+     */
+    BufferedImage image;
+    
+    
     /**
      * Creates new form DigImView
      */
@@ -18,22 +32,108 @@ public class DigImView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        browseButton = new javax.swing.JButton();
+        countButton = new javax.swing.JButton();
+        resultLabel = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JLabel();
+        imagePanel = new javax.swing.JPanel();
+        countResultLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        browseButton.setText("Pilih Gambar");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonActionPerformed(evt);
+            }
+        });
+
+        countButton.setText("Hitung jumlah warna");
+
+        resultLabel.setText("Jumlah warna pada gambar");
+
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 331, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(browseButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imageLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(countButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(resultLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(countResultLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(browseButton)
+                    .addComponent(countButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(resultLabel)
+                            .addComponent(imageLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(countResultLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Open Image");
+        fc.showOpenDialog(this);
+        
+        try{
+            image = ImageIO.read(fc.getSelectedFile().getAbsoluteFile());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Gagal membuka file: " + e.getMessage());
+        }
+
+        imageLabel.setIcon(new ImageIcon(rescale(image)));
+        imagePanel.setLayout(new BorderLayout(0,0));
+        imagePanel.add(imageLabel);
+        setVisible(true);
+    }//GEN-LAST:event_browseButtonActionPerformed
+    
+    /**
+     * Rescale image fit to image panel
+     */
+    public BufferedImage rescale(final BufferedImage original) {
+        BufferedImage result = new BufferedImage(imagePanel.getWidth(), imagePanel.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = result.createGraphics();
+        g.drawImage(original, 0, 0, imagePanel.getWidth(), imagePanel.getHeight(), null);
+        g.dispose();
+        return result;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -70,5 +170,11 @@ public class DigImView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browseButton;
+    private javax.swing.JButton countButton;
+    private javax.swing.JLabel countResultLabel;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel imagePanel;
+    private javax.swing.JLabel resultLabel;
     // End of variables declaration//GEN-END:variables
 }
