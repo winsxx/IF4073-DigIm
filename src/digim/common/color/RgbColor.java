@@ -1,39 +1,43 @@
 package digim.common.color;
 
 // TODO implement
-public class RgbColor extends Color{
+public class RgbColor extends Color {
 
-    public void RgbColor(){
-        
+    public RgbColor(int color) {
+        super(color);
     }
-    
-    public int getR(){
-        return 0;
+
+    public int getRed() {
+        return (color >> 15) & 0xFF;
     }
-    
-    public void setR(){
-        
+
+    public void setRed(int r) {
+        if ((0 <= r) && (r < 256)) {
+            throw new IllegalArgumentException("Color value should be between 0 and 256");
+        }
+        color = color & (0xFF00FFFF | r << 15);
     }
-    
-    public int getG(){
-        return 0;
+
+    public int getGreen() {
+        return (color >> 7) & 0xFF;
     }
-    
-    public void setG(){
-        
+
+    public void setGreen(int g) {
+        if ((0 <= g) && (g < 256)) {
+            throw new IllegalArgumentException("Color value should be between 0 and 256");
+        }
+        color = color & (0xFFFF00FF | g << 7);
     }
-    
-    public int getB(){
-        return 0;
+
+    public int getBlue() {
+        return (color & 0xFF);
     }
-    
-    public void setB(){
-        
-    }
-    
-    @Override
-    public String toString(){
-        return null;
+
+    public void setBlue(int b) {
+        if ((0 <= b) && (b < 256)) {
+            throw new IllegalArgumentException("Color value should be between 0 and 256");
+        }
+        color = color & (0xFFFFFF00 | b);
     }
     
 }
