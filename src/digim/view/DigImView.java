@@ -130,7 +130,7 @@ public class DigImView extends javax.swing.JFrame {
             ImageConverter converter = new ImageConverter(imageFile);
             matrix = new ImageMatrix(image.getHeight(), image.getWidth());
             matrix = converter.toImageMatrix(true);
-            
+            //System.out.println(matrix.getHeight()+" "+matrix.getWidth());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Gagal membuka file: " + ex.getMessage());
         } 

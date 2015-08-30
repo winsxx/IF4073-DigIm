@@ -3,6 +3,7 @@ package digim.analytics;
 import digim.common.ImageMatrix;
 import digim.common.color.Color;
 import digim.common.color.RgbColor;
+import java.util.Arrays;
 
 public class ImageColorAnalyzer {
     public long distinctColorCount(ImageMatrix image){
@@ -11,6 +12,7 @@ public class ImageColorAnalyzer {
         int imageSize = imageWidth*imageHeight;
 
         // Bubble Sort Ascending
+        /*
         for(int i=0; i<imageSize-1; i++) {
         	for(int j=i+1; j<imageSize; j++) {
         		Color iColor = image.getColor(i/imageWidth, i%imageWidth);
@@ -29,6 +31,15 @@ public class ImageColorAnalyzer {
         		}
         	}
         }
+        */
+        
+        int[] matrixTemp = new int[imageSize];
+        for(int i=0; i<imageSize; i++) {
+            Color color = image.getColor(i/imageWidth, i%imageWidth);
+            matrixTemp[i] = color.getColor();
+        }
+        
+        Arrays.sort(matrixTemp);
 
         // Different Pixel Counting
         // if the pixel if first pixel, increase result
@@ -40,13 +51,18 @@ public class ImageColorAnalyzer {
         	}
         	else{
         		int j = i-1;
-        		Color iColor = image.getColor(i/imageWidth, i%imageWidth);
+        		/*
+                        Color iColor = image.getColor(i/imageWidth, i%imageWidth);
         		Color jColor = image.getColor(j/imageWidth, j%imageWidth);
 
         		Integer iColorValue = iColor.getColor();
         		Integer jColorValue = jColor.getColor();
         		
         		if( !iColorValue.equals(jColorValue) ) {
+        			result += 1;
+        		}
+                        */
+                        if( matrixTemp[i] != matrixTemp[j] ) {
         			result += 1;
         		}
         	}
