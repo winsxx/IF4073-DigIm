@@ -3,20 +3,19 @@ package digim.common;
 import digim.common.color.Color;
 
 public class ImageMatrix<ColorType extends Color> {
+    
+    private Color[][] matrix;
 
-    private final ColorType[][] matrix;
-
-    @SuppressWarnings("unchecked")
-    public ImageMatrix(int width, int height) {
-        matrix = (ColorType[][]) new Object[height][width];
+    public ImageMatrix(int height, int width) {
+        matrix = new Color[height][width];
     }
-
-    public void setColor(int row, int col, ColorType colorType) {
-        matrix[row][col] = colorType;
+    
+    public void setColor(int row, int col, ColorType color){
+        matrix[row][col] = color;
     }
-
-    public ColorType getColor(int row, int col) {
-        return matrix[row][col];
+    
+    public ColorType getColor(int row, int col){
+        return (ColorType) matrix[row][col];
     }
     
 }
