@@ -1,7 +1,7 @@
 package digim.common.color;
 
 // TODO Implement
-public class RgbaColor {
+public class RgbaColor extends Color{
     private Integer color;
     
     public void RgbaColor(){
@@ -25,7 +25,7 @@ public class RgbaColor {
         return 0;
     }
     
-    public void setR(){
+    public void setR(int value){
         
     }
     
@@ -33,7 +33,7 @@ public class RgbaColor {
         return 0;
     }
     
-    public void setG(){
+    public void setG(int value){
         
     }
     
@@ -41,7 +41,7 @@ public class RgbaColor {
         return 0;
     }
     
-    public void setB(){
+    public void setB(int value){
         
     }
     
@@ -49,7 +49,7 @@ public class RgbaColor {
         return 0;
     }
     
-    public void setA(){
+    public void setA(int value){
         
     }
     

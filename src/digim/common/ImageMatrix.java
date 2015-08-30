@@ -4,8 +4,8 @@ import digim.common.color.Color;
 
 public class ImageMatrix<ColorType extends Color> {
     private ColorType[][] matrix;
-    
-    public void ColorMetrix(int width, int height){
+
+    public ImageMatrix(int height, int width) {
         
     }
     

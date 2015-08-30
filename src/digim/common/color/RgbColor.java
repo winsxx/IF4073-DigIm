@@ -11,7 +11,7 @@ public class RgbColor extends Color{
         return 0;
     }
     
-    public void setR(){
+    public void setR(int value){
         
     }
     
@@ -19,7 +19,7 @@ public class RgbColor extends Color{
         return 0;
     }
     
-    public void setG(){
+    public void setG(int value){
         
     }
     
@@ -27,7 +27,7 @@ public class RgbColor extends Color{
         return 0;
     }
     
-    public void setB(){
+    public void setB(int value){
         
     }
     
