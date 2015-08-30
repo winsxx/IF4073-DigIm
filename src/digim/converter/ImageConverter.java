@@ -11,7 +11,7 @@ public class ImageConverter {
 
     BufferedImage image;
 
-    ImageConverter(File file) throws IOException {
+    public ImageConverter(File file) throws IOException {
         image = ImageIO.read(file);
     }
 

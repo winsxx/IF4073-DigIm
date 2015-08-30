@@ -84,6 +84,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Hitung jumlah warna"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="countButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="resultLabel">
       <Properties>

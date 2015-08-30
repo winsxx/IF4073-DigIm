@@ -1,8 +1,13 @@
 package digim.view;
 
+import digim.analytics.ImageColorAnalyzer;
+import digim.common.ImageMatrix;
+import digim.converter.ImageConverter;
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -13,8 +18,10 @@ public class DigImView extends javax.swing.JFrame {
     /**
      * DigIm Variables
      */
+    File imageFile;
     BufferedImage image;
-    
+    ImageMatrix matrix;
+    ImageColorAnalyzer analyze;
     
     /**
      * Creates new form DigImView
@@ -49,6 +56,11 @@ public class DigImView extends javax.swing.JFrame {
         });
 
         countButton.setText("Hitung jumlah warna");
+        countButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countButtonActionPerformed(evt);
+            }
+        });
 
         resultLabel.setText("Jumlah warna pada gambar");
 
@@ -112,16 +124,31 @@ public class DigImView extends javax.swing.JFrame {
         fc.showOpenDialog(this);
         
         try{
-            image = ImageIO.read(fc.getSelectedFile().getAbsoluteFile());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Gagal membuka file: " + e.getMessage());
-        }
-
+            imageFile = fc.getSelectedFile().getAbsoluteFile();
+            image = ImageIO.read(imageFile);
+            ImageConverter converter = new ImageConverter(imageFile);
+            matrix = new ImageMatrix(image.getWidth(), image.getHeight());
+            matrix = converter.toImageMatrix(true);
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal membuka file: " + ex.getMessage());
+        } 
+        
+            
         imageLabel.setIcon(new ImageIcon(rescale(image)));
         imagePanel.setLayout(new BorderLayout(0,0));
         imagePanel.add(imageLabel);
         setVisible(true);
     }//GEN-LAST:event_browseButtonActionPerformed
+
+    private void countButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countButtonActionPerformed
+        if (matrix != null) {
+            long result = analyze.distinctColorCount(matrix);
+            resultLabel.setText(String.valueOf(result));
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih gambar terlebih dahulu");
+        }
+    }//GEN-LAST:event_countButtonActionPerformed
     
     /**
      * Rescale image fit to image panel
