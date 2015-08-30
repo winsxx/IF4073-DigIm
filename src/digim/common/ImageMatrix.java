@@ -5,9 +5,13 @@ import digim.common.color.Color;
 public class ImageMatrix<ColorType extends Color> {
     
     private Color[][] matrix;
+    private int height;
+    private int width;
 
     public ImageMatrix(int height, int width) {
         matrix = new Color[height][width];
+        this.height = height;
+        this.width = width;
     }
     
     public void setColor(int row, int col, ColorType color){
