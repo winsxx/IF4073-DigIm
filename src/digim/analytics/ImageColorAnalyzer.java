@@ -19,7 +19,7 @@ public class ImageColorAnalyzer {
         		int iColorValue = iColor.getColor();
         		int jColorValue = jColor.getColor();
 
-        		if( iColorValue!= jColorValue){
+        		if( iColorValue > jColorValue ){
         			// swap value
         			Color iNewColor = new RgbColor(jColorValue);
 				Color jNewColor = new RgbColor(iColorValue);  			
