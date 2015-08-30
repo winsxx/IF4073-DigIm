@@ -1,8 +1,17 @@
 package digim.common.color;
 
 public abstract class Color {
-    private Integer color;
-    
+
+    protected Integer color;
+
+    public Color() {
+        color = 0;
+    }
+
+    public Color(int color) {
+        this.color = color;
+    }
+
     /**
      * @return the color
      */
@@ -16,8 +25,10 @@ public abstract class Color {
     public void setColor(Integer color) {
         this.color = color;
     }
-    
+
     @Override
-    public abstract String toString();
-    
+    public String toString() {
+        return color.toString();
+    }
+
 }
