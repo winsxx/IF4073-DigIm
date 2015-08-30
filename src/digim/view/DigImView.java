@@ -131,7 +131,7 @@ public class DigImView extends javax.swing.JFrame {
             matrix = new ImageMatrix(image.getHeight(), image.getWidth());
             matrix = converter.toImageMatrix(true);
             
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Gagal membuka file: " + ex.getMessage());
         } 
         
@@ -145,7 +145,7 @@ public class DigImView extends javax.swing.JFrame {
     private void countButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countButtonActionPerformed
         if (matrix != null) {
             long result = analyze.distinctColorCount(matrix);
-            resultLabel.setText(String.valueOf(result));
+            countResultLabel.setText(String.valueOf(result));
         } else {
             JOptionPane.showMessageDialog(this, "Pilih gambar terlebih dahulu");
         }
