@@ -13,6 +13,14 @@ public class ImageMatrix<ColorType extends Color> {
         this.height = height;
         this.width = width;
     }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
     
     public void setColor(int row, int col, ColorType color){
         matrix[row][col] = color;
