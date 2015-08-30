@@ -28,6 +28,7 @@ public class DigImView extends javax.swing.JFrame {
      */
     public DigImView() {
         initComponents();
+        analyze = new ImageColorAnalyzer();
     }
 
     /**
@@ -127,7 +128,7 @@ public class DigImView extends javax.swing.JFrame {
             imageFile = fc.getSelectedFile().getAbsoluteFile();
             image = ImageIO.read(imageFile);
             ImageConverter converter = new ImageConverter(imageFile);
-            matrix = new ImageMatrix(image.getWidth(), image.getHeight());
+            matrix = new ImageMatrix(image.getHeight(), image.getWidth());
             matrix = converter.toImageMatrix(true);
             
         } catch (IOException ex) {

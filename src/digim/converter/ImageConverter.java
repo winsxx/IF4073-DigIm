@@ -17,7 +17,7 @@ public class ImageConverter {
 
     public ImageMatrix toImageMatrix(Boolean withAlpha) {
         ImageMatrix imageMatrix;
-        imageMatrix = new ImageMatrix<>(image.getWidth(), image.getHeight());
+        imageMatrix = new ImageMatrix<>(image.getHeight(), image.getWidth());
         
         for (int i = image.getMinY(); i < image.getHeight(); ++i) {
             for (int j = image.getMinX(); j < image.getWidth(); ++j) {
