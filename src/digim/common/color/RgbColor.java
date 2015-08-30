@@ -1,6 +1,5 @@
 package digim.common.color;
 
-// TODO implement
 public class RgbColor extends Color {
 
     public RgbColor(int color) {
